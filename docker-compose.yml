@@ -1,6 +1,6 @@
 version: '3.8'
 services: 
-  react-nodejs-app:
+  web:
     image: react-nodejs-app:lts
     ports:
       - 3000:80
