@@ -1,6 +1,6 @@
 version: '3.8'
 services: 
   web:
-    image: react-nodejs-app:lts
+    image: chinmayapradhan/react-nodejs-app:lts
     ports:
       - 3000:80
