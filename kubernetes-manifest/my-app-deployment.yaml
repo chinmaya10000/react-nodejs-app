@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-nodejs-app
+  labels:
+    app: react-nodejs-app
+spec:
+  replicas: 3  # You can adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: react-nodejs-app
+  template:
+    metadata:
+      labels:
+        app: react-nodejs-app
+    spec:
+      imagePullSecrets:
+        - name: my-registry-key
+      containers:
+        - name: web
+          image: 295969699274.dkr.ecr.us-east-2.amazonaws.com/my-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
