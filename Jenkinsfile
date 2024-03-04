@@ -34,7 +34,7 @@ pipeline{
         stage('Clone/Pull Repo') {
             steps {
                 script {
-                    if (fileExists('DevSecOps-Project')) {
+                    if (fileExists('react-nodejs-app')) {
                         echo 'Cloned repo already exists - Pulling latest changes'
 
                         dir("DevSecOps-Project") {
