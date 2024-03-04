@@ -2,7 +2,6 @@ pipeline{
     agent any
 
     environment {
-        SCANNER_HOME=tool 'sonar-scanner'
         DOCKER_HUB_CREDENTIALS = credentials('docker-hub-repo')
         GITHUB_CREDENTIALS = credentials('github-token')
         DOCKER_IMAGE_NAME = "chinmayapradhan/react-nodejs-app"
