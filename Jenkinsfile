@@ -2,9 +2,9 @@ pipeline{
     agent any
 
     environment {
-        DOCKER_HUB_CREDENTIALS = credentials('docker-hub-repo')
         GITHUB_CREDENTIALS = credentials('github-token')
         DOCKER_IMAGE_NAME = "chinmayapradhan/react-nodejs-app"
+        VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
         GITHUB_REPO_URL = "https://github.com/chinmaya10000/react-nodejs-app.git"
     }
 
@@ -21,12 +21,10 @@ pipeline{
             steps {
                 script {
                     echo "build and push the docker image.."
-
-                    def dockerImageVersion = "v${env.BUILD_NUMBER}"
-
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_HUB_CREDENTIALS) {
-                        def dockerImage = docker.build("${DOCKER_IMAGE_NAME}:${dockerImageVersion}")
-                        dockerImage.push()
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                        sh "docker build -t ${DOCKER_IMAGE_NAME}:${VERSION} ."
+                        sh "echo $PASS | docker login -u $USER --password-stdin"
+                        sh "docker push ${DOCKER_IMAGE_NAME}:${VERSION}"
                     }
                 }
             }
