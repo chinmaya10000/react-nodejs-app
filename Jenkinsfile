@@ -49,8 +49,8 @@ pipeline {
         stage('Update deployment.yaml') {
             steps {
                 script {
-                    def newImageTag = sh(script: 'docker inspect --format=\'{{.Id}}\' $DOCKER_IMAGE_NAME', returnStdout: true).trim()
-                    sh "sed -i 's|image: $DOCKER_IMAGE_NAME.*|image: $DOCKER_IMAGE_NAME:$newImageTag|' kubernetes-manifest/my-app-deployment.yaml"
+                    def newImageTag = sh(script: 'docker inspect --format=\'{{.Id}}\' ${DOCKER_IMAGE_NAME}:${VERSION}', returnStdout: true).trim()
+                    sh "sed -i 's|image: ${DOCKER_IMAGE_NAME}.*|image: ${DOCKER_IMAGE_NAME}:${newImageTag}|' kubernetes-manifest/my-app-deployment.yaml"
                 }
             }
         }
@@ -59,10 +59,10 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'GITHUB_CREDENTIALS', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
                         sh 'git config --global user.name "jenkins"'
-                        sh 'git config --global user.email "jenkins@gmail.com"'
+                        sh 'git config --global user.email "jenkins"@gmail.com'
                         sh "git remote set-url origin https://${USER}:${PASS}@github.com/chinmaya10000/react-nodejs-app.git"
                         sh 'git add kubernetes-manifest/my-app-deployment.yaml'
-                        sh 'git commit -m "Updated image version for Build - $VERSION"'
+                        sh 'git commit -m "Updated image version for Build - $dockerImageVersion"'
                         sh 'git push origin HEAD:master'
                     }
                 }
