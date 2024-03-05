@@ -13,7 +13,7 @@ pipeline{
             steps {
                 script {
                     echo "Clone the repo.."
-                    git branch: 'master', url: 'https://github.com/chinmaya10000/react-nodejs-app.git'
+                    git 'https://github.com/chinmaya10000/react-nodejs-app.git'
                 }
             }
         }
