@@ -61,7 +61,7 @@ pipeline {
                         sh 'git config --global user.email "jenkins"@gmail.com'
                         sh "git remote set-url origin https://${USER}:${PASS}@github.com/chinmaya10000/react-nodejs-app.git"
                         sh 'git status'
-                        sh 'git add kubernetes-manifest/my-app-deployment.yaml'
+                        sh 'git add .'
                         sh 'git commit -m "Updated image version for Build - $newImageTag"'
                         sh 'git status'
                         sh 'git push origin HEAD:master'
