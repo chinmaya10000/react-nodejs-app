@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        GITHUB_CREDENTIALS = credentials('github-token')
         DOCKER_IMAGE_NAME = "chinmayapradhan/react-nodejs-app"
         VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
         GITHUB_REPO_URL = "https://github.com/chinmaya10000/react-nodejs-app.git"
@@ -57,7 +56,7 @@ pipeline {
         stage('Push Changes to GitHub') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'GITHUB_CREDENTIALS', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                    withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
                         sh 'git config --global user.name "jenkins"'
                         sh 'git config --global user.email "jenkins"@gmail.com'
                         sh "git remote set-url origin https://${USER}:${PASS}@github.com/chinmaya10000/react-nodejs-app.git"
