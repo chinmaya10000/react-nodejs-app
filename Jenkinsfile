@@ -28,23 +28,6 @@ pipeline {
                 }
             }
         }
-        stage('Clone/Pull Repo') {
-            steps {
-                script {
-                    if (fileExists('react-nodejs-app')) {
-                        echo 'Cloned repo already exists - Pulling latest changes'
-
-                        dir("react-nodejs-app") {
-                            sh 'git pull'
-                        }
-                    }
-                    else {
-                        echo 'Repo does not exists - Cloning the repo'
-                        sh 'git clone -b master https://github.com/chinmaya10000/react-nodejs-app.git'
-                    }
-                }
-            }
-        }
         stage('Update deployment.yaml') {
             steps {
                 script {
