@@ -34,7 +34,7 @@ pipeline {
                     if (fileExists('react-nodejs-app')) {
                         echo 'Cloned repo already exists - Pulling latest changes'
 
-                        dir("DevSecOps-Project") {
+                        dir("react-nodejs-app") {
                             sh 'git pull'
                         }
                     }
