@@ -18,7 +18,7 @@ spec:
         - name: my-registry-key
       containers:
         - name: web
-          image: 295969699274.dkr.ecr.us-east-2.amazonaws.com/my-app:latest
+          image: chinmayapradhan/react-nodejs-app:replaceImageTag
           imagePullPolicy: Always
           ports:
             - containerPort: 80
