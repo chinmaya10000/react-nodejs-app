@@ -18,7 +18,7 @@ spec:
         - name: my-registry-key
       containers:
         - name: web
-          image: chinmayapradhan/react-nodejs-app:replaceImageTag
+          image: chinmayapradhan/react-nodejs-app:2
           imagePullPolicy: Always
           ports:
             - containerPort: 80
