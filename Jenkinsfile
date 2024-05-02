@@ -28,7 +28,7 @@ pipeline {
                           git config --global user.name "chinmaya10000"
                           git config --global user.email "chinmayapradhan10000@gmail.com"
                           git remote set-url origin https://${GITHUB_TOKEN}@github.com/chinmaya10000/react-nodejs-app.git
-                          sed -i "s/replaceImageTag/${IMAGE_VERSION}/g" kubernetes-manifest/my-app-deployment.yaml
+                          sed -i "s#chinmayapradhan.*#${DOCKER_IMAGE_NAME}:${IMAGE_VERSION}#g" kubernetes-manifest/my-app-deployment.yaml
                           git add kubernetes-manifest/my-app-deployment.yaml
                           git commit -m "Updated image version for Build - $IMAGE_VERSION"
                           git push origin HEAD:master
